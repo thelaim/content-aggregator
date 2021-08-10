@@ -1,7 +1,11 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from rest_framework import viewsets
 
-class TestAPIView(APIView):
-    def get(self, request, *args, **kwargs):
-        data = [{"id": 1, "name": "John",}, {"id": 2, "name": "Jane"}]
-        return Response(data)
+from .serializers import ArticleSerializer
+from ..models import Article
+
+
+class ArticleViewSet(viewsets.ModelViewSet):
+
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+
