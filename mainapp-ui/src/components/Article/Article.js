@@ -1,15 +1,17 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useEffect, useState} from "react";
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 function Article() {
 
     const [article, setArticle] = useState([])
 
+
     useEffect(()=>{
         axios({
             method: "GET",
-            url: 'http://127.0.0.1:8000/api/Article/'
+            url: 'http://127.0.0.1:8000/api/article/'
         }).then(response =>{
             setArticle(response.data)
         })
@@ -28,7 +30,7 @@ function Article() {
                     <ul className="navbar-nav">
                         {article.map(c =>(
                             <li className="nav-item">
-                                <a className="nav-link" href="#" key={c.id}>{c.title}</a>
+                                <Link classname="nav-link" to={{ pathname: `/post/${c.id}/`, fromDashboard: false }}>{c.title}</Link>
                             </li>
                         ))}
                     </ul>

@@ -4,7 +4,7 @@ from rest_framework import routers
 from .views import ArticleViewSet
 
 router = routers.SimpleRouter()
-router.register('Article', ArticleViewSet, basename='Article')
+router.register('article', ArticleViewSet, basename='article')
 
 urlpatterns = []
 urlpatterns += router.urls
