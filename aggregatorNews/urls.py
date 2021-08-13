@@ -16,11 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from mainapp.views import index, article_detail
+from mainapp.views import index, article_detail, setcookie, get_cookie, delcookie
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
     path('post/<int:id>/', article_detail),
-    path('api/', include('mainapp.api.urls'))
+    path('api/', include('mainapp.api.urls')),
+
+
+    path('setcookie', setcookie),
+    path('getcookie', get_cookie),
+    path('delcookie', delcookie),
 ]

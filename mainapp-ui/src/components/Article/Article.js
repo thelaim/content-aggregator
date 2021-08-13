@@ -11,9 +11,9 @@ function Article() {
     useEffect(()=>{
         axios({
             method: "GET",
-            url: 'http://127.0.0.1:8000/api/article/'
+            url: 'http://127.0.0.1:8000/api/article-test/'
         }).then(response =>{
-            setArticle(response.data)
+            setArticle(response.data.data)
         })
     }, [])
 
