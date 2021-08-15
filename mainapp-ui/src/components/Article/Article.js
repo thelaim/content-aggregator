@@ -37,6 +37,47 @@ function Article() {
                 </div>
             </div>
         </nav>
+
+        {/*{article.map(c =>(*/}
+        {/*    <div className="card" style={{width: '18rem'}}>*/}
+        {/*        <img src={c.url_photo} className="card-img-top"/>*/}
+        {/*        <div className="card-body">*/}
+        {/*            <h5 className="card-title">{c.title}</h5>*/}
+        {/*            <p className="card-text">{c.content}</p>*/}
+        {/*            <Link classname="nav-link" to={{ pathname: `/post/${c.id}/`, fromDashboard: false }}>Go</Link>*/}
+        {/*        </div>*/}
+        {/*    </div>*/}
+        {/*))}*/}
+
+
+        <main className="main columns">
+            {article.map(c =>(
+            <section className="column main-column">
+
+                <div className="columns">
+                    <div className="column nested-column">
+                        <a className="article" href="#">
+                            <figure className="article-image is-16by9">
+                                <img src={c.url_photo} alt="No source" />
+                            </figure>
+                            <div className="article-body">
+                                <h2 className="article-title">
+                                    {c.title}
+                                </h2>
+                                <p className="article-content">
+                                    {c.content}
+                                </p>
+                                <footer className="article-info">
+                                    <span><Link classname="nav-link" to={{ pathname: `/post/${c.id}/`, fromDashboard: false }}>Go details</Link></span>
+                                </footer>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+         ))}
+        </main>
+
     </div>
   );
 }
