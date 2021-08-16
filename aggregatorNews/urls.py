@@ -25,9 +25,7 @@ urlpatterns = [
     path('', index),
     path('post/<int:id>/', article_detail),
     path('api/', include('mainapp.api.urls')),
-
-
-    path('setcookie', setcookie),
+    path('setcookie/<int:pk>/', setcookie),
     path('getcookie', get_cookie),
     path('delcookie', delcookie),
 ]

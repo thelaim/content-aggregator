@@ -18,11 +18,12 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
 class ArticleView(APIView):
     def get(self, request):
-        if 'article' not in request.session:
-            articles = Article.objects.all()
-        if 'article' in request.session:
-            info = str(request.session['article'][-1])
-            articles = Article.objects.filter(id=info)
+        # if 'article-test-cookie-id' not in request.COOKIES:
+        #     articles = Article.objects.all()
+        # if 'article-test-cookie-id' in request.COOKIES:
+        #     info = str(request.COOKIES['article-test-cookie-id'][-1])
+        #     articles = Article.objects.filter(id=info)
+        articles = Article.objects.all()
         serializer = ArticleSerializer(articles, many=True)
         return Response({"data": serializer.data})
 

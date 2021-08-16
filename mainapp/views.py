@@ -10,18 +10,23 @@ def index(request):
 def article_detail(request, id):
     return render(request, 'index.html', {})
 
-def setcookie(request):
+def setcookie(request, pk):
     if 'article' not in request.session:
         request.session['article'] = []
-    if 2 not in request.session['article']:
-        request.session['article'].append(2)
+        request.session['article'].append(pk)
         request.session.modified = True
+        return redirect('/')
+    elif pk != request.session['article'][-1]:
+        request.session['article'].append(pk)
+        request.session.modified = True
+        return redirect('/')
+    else:
         return redirect('/')
     # response = HttpResponse("Welcome Guest.")
     # response.set_cookie('article', 1)
 
 def get_cookie(request):
-    info = str(request.session['article'][-1])
+    info = str(request.COOKIES['article-test-cookie-id'][-1])
     return HttpResponse("Welcome Guest." + info)
 
 def delcookie(request):
