@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from mainapp.views import index, article_detail, setcookie, get_cookie, delcookie
+from mainapp.views import index, article_detail, setcookie, get_cookie, delcookie, parse_data
 
 
 
@@ -28,4 +28,5 @@ urlpatterns = [
     path('setcookie/<int:pk>/', setcookie),
     path('getcookie', get_cookie),
     path('delcookie', delcookie),
+    path('getrec', parse_data),
 ]
