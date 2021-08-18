@@ -8,6 +8,8 @@ from rest_framework.views import APIView
 from .serializers import ArticleSerializer
 from ..models import Article
 
+from mainapp.recommendations.test import recommendation
+
 
 
 
@@ -18,12 +20,17 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
 class ArticleView(APIView):
     def get(self, request):
-        # if 'article-test-cookie-id' not in request.COOKIES:
-        #     articles = Article.objects.all()
-        # if 'article-test-cookie-id' in request.COOKIES:
-        #     info = str(request.COOKIES['article-test-cookie-id'][-1])
-        #     articles = Article.objects.filter(id=info)
-        articles = Article.objects.all()
+        if 'article-test-cookie-id' not in request.COOKIES:
+            articles = Article.objects.all()
+        if 'article-test-cookie-id' in request.COOKIES:
+            info = str(request.COOKIES['article-test-cookie-id'])
+            get_article = Article.objects.get(pk=info)
+            rec = recommendation(get_article.title)
+
+            articles = Article.objects.filter(title__in=rec)
+
+        # rec = recommendation('В Mozilla испугались, что новый Firefox «сломает» сайты, и призвали на помощь пользователей')
+        # articles = Article.objects.all()[:10]
         serializer = ArticleSerializer(articles, many=True)
         return Response({"data": serializer.data})
 

@@ -5,16 +5,16 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 
 from django.contrib.auth.decorators import login_required
+from .models import Article
 
 import sys
 sys.path.insert(1, 'recommendations')
 from mainapp.recommendations.test import recommendation
+from mainapp.parsing.pars import Parser
 
 import os
 workpath = os.path.dirname(os.path.abspath(__file__))
 
-import pickle
-import pandas as pd
 
 def index(request):
     return render(request, 'index.html', {})
@@ -22,9 +22,7 @@ def index(request):
 def article_detail(request, id):
     return render(request, 'index.html', {})
 
-@login_required
-def parse_data(request):
-    return redirect('/')
+
 
 def parse_data(request):
     # feed_name = 'В Mozilla испугались, что новый Firefox «сломает» сайты, и призвали на помощь пользователей'
@@ -44,8 +42,17 @@ def parse_data(request):
     # top_10_indexes = list(score_series.iloc[1:101].index)
     # for i in top_10_indexes:
     #     recommendation_feed.append(list(feed.index)[i])
-    info = recommendation('В Mozilla испугались, что новый Firefox «сломает» сайты, и призвали на помощь пользователей')
-    return HttpResponse("Welcome Guest." + str(info))
+    data = Parser()
+    data_save_lenta = data.data_lenta('https://lenta.ru/rss/news')
+    data_save_cnews = data.data_cnews('https://www.cnews.ru/inc/rss/news.xml')
+    for key, value in data_save_lenta.items():
+        article = Article(title=key, content=value[1], url_article=value[0], url_photo=value[2])
+        article.save()
+    for key, value in data_save_cnews.items():
+        article = Article(title=key, content=value[1], url_article=value[0])
+        article.save()
+    # info = recommendation('В Mozilla испугались, что новый Firefox «сломает» сайты, и призвали на помощь пользователей')
+    return HttpResponse("Welcome Guest.")
 
 def setcookie(request, pk):
     if 'article' not in request.session:
@@ -59,18 +66,16 @@ def setcookie(request, pk):
         return redirect('/')
     else:
         return redirect('/')
-    # response = HttpResponse("Welcome Guest.")
-    # response.set_cookie('article', 1)
 
 def get_cookie(request):
-    info = str(request.COOKIES['article-test-cookie-id'][-1])
+    info = request.COOKIES['article-test-cookie-id']
     return HttpResponse("Welcome Guest." + info)
 
 def delcookie(request):
-    if 'article' not in request.session:
+    if 'article-test-cookie-id' not in request.COOKIES:
         return redirect('/')
-    if 'article' in request.session:
-        del request.session['article']
+    if 'article-test-cookie-id' in request.COOKIES:
+        del request.COOKIES['article-test-cookie-id']
         request.session.modified = True
         return redirect('/')
 
