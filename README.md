@@ -1,3 +1,3 @@
 # Пример работы
 
-![Alt Text](https://recordit.co/x5UeMwehFC)
+![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
