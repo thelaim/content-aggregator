@@ -18,11 +18,11 @@ function ArticleDetail({ match }) {
     }, [id])
 
     return (
-        <div>
-            Post with id {post.id}
-            <p>Title <strong>{post.title}</strong></p>
+        <div class="detail">
+            Пост номер: {post.id}<br/>
+            <img src={post.url_photo} alt="No source" class="detail-image"/>
+            <p><strong>{post.title}</strong></p>
             <p>{post.content}</p>
-            <p><Link classname="nav-link" to={{ pathname: `/setcookie/${post.id}/`, fromDashboard: false }}>Хочу больше такого контента</Link></p>
             <p><a target="_blank" href={post.url_article}>Ссылка на статью</a></p>
         </div>
 

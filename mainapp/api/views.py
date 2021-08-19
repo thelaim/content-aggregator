@@ -27,7 +27,7 @@ class ArticleView(APIView):
             get_article = Article.objects.get(pk=info)
             rec = recommendation(get_article.title)
 
-            articles = Article.objects.filter(title__in=rec)
+            articles = Article.objects.filter(title__in=rec).distinct('title')
 
         # rec = recommendation('В Mozilla испугались, что новый Firefox «сломает» сайты, и призвали на помощь пользователей')
         # articles = Article.objects.all()[:10]

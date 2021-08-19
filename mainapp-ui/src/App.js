@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
         <Router>
-            <header><Link to={{ pathname: `/`, fromDashboard: false }}>Главная</Link></header>
+            <header><h1><Link to={{ pathname: `/`, fromDashboard: false }}>Главная</Link></h1></header>
 
             <Switch>
                 <Route path="/" exact component={Article}/>
