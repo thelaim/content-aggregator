@@ -1,3 +1,3 @@
 # Пример работы
 
-![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+<img src="https://recordit.co/x5UeMwehFC" width="40" height="40" />
