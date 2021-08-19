@@ -1,9 +1,8 @@
-import csv
+
 import xml.etree.ElementTree as et
 import requests
 import  re
-# import lxml.html
-# from bs4 import BeautifulSoup
+
 
 class Parser:
 
@@ -17,7 +16,6 @@ class Parser:
             item_lenta[str(i.find('title').text)].append(desc)
             item_lenta[str(i.find('title').text)].append(str(i.find('enclosure').attrib['url']))
             item_lenta[str(i.find('title').text)].append(str(i.find('pubDate').text))
-            # item_lenta[str(i.find('title').text)].append(str(i.find('category').text))
 
         return item_lenta
 

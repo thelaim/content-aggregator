@@ -24,24 +24,7 @@ def article_detail(request, id):
 
 
 
-def parse_data(request):
-    # feed_name = 'В Mozilla испугались, что новый Firefox «сломает» сайты, и призвали на помощь пользователей'
-    # opencsv = open(os.path.join(workpath, "recommendations/data.csv"), "rb")
-    # feed = pd.read_csv(opencsv, delimiter=',', error_bad_lines=False)
-    # feed.set_index('title', inplace=True)
-    # print(1)
-    # openmatrix = open(os.path.join(workpath, "recommendations/tfidf_matrix.pickle"), "rb")
-    # cos_sim = pickle.load(openmatrix)
-    # # cos_sim = pickle.load(open("recommendations/tfidf_matrix.pickle", "rb"))
-    #
-    # name = pd.Series(feed.index)
-    #
-    # recommendation_feed = []
-    # idx = name[name == feed_name].index[0]
-    # score_series = pd.Series(cos_sim[idx]).sort_values(ascending=False)
-    # top_10_indexes = list(score_series.iloc[1:101].index)
-    # for i in top_10_indexes:
-    #     recommendation_feed.append(list(feed.index)[i])
+def parse_data(request):          # здесь мы достаем данные из парсера и сохраняем
     data = Parser()
     data_save_lenta = data.data_lenta('https://lenta.ru/rss/news')
     data_save_cnews = data.data_cnews('https://www.cnews.ru/inc/rss/news.xml')
@@ -51,7 +34,6 @@ def parse_data(request):
     for key, value in data_save_cnews.items():
         article = Article(title=key, content=value[1], url_article=value[0])
         article.save()
-    # info = recommendation('В Mozilla испугались, что новый Firefox «сломает» сайты, и призвали на помощь пользователей')
     return HttpResponse("Welcome Guest.")
 
 def setcookie(request, pk):

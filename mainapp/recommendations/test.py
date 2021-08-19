@@ -27,5 +27,5 @@ def recommendation(feed_name):
     # print(recommendation_feed)
     return recommendation_feed
 
-recommendation('Бежавший президент Афганистана рассказал о заговоре против него')
+
 
